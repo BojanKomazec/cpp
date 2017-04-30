@@ -56,6 +56,7 @@ void gcd_test()
     assert(gcd(24, 8) == 8);
     assert(gcd(6, 21) == 3);
     assert(gcd(34340544, 88393728) == 192); 
+    assert(gcd(145578633, 82465690) == 233);
 }
 
 void gcd_demo()
