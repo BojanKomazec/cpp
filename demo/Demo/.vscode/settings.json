@@ -38,6 +38,7 @@
         "typeinfo": "cpp",
         "codecvt": "cpp",
         "istream": "cpp",
-        "streambuf": "cpp"
+        "streambuf": "cpp",
+        "*.ipp": "cpp"
     }
 }

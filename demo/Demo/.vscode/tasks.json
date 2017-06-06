@@ -4,8 +4,9 @@
     "version": "0.1.0",
     "command": "g++",
     "isShellCommand": true,
-    "args": ["-std=c++14", "-Wall", "-pedantic", "-g", "-O0",
-        "main.cpp", "variables_types_demo.cpp", "stl/vector_demo.cpp", "strings_demo.cpp", "objects_classes_demo.cpp",
+    "args": ["-std=c++14", "-Wall", "-pedantic", "-g", "-Wno-unused-variable", "-Wno-unused-but-set-variable",
+        "main.cpp", "variables_types_demo.cpp", "stl/vector_demo.cpp", "stl/streams_demo.cpp", "strings_demo.cpp", "objects_classes_demo.cpp",
+        "polymorphism_demo.cpp", "regex_demo.cpp", "smart_pointers_demo.cpp", "enum_demo.cpp", "stl/containers/set_demo.cpp",
         "-o", "demo.out"],
     "showOutput": "always",
     "echoCommand": true

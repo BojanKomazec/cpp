@@ -1,23 +1,28 @@
 #include "include/objects_classes_demo.h"
 #include <cstring>
 #include <iostream>
+#include <cassert>
+#include <vector>
 
 class MyString {
 public:
+    // Default c-tor
     MyString(){
-        std::cout << "Before initialization: buffer = " << _buffer << std::endl;
-        _buffer = nullptr;
+        assert(_buffer != nullptr);
     }
 
+    // Converting c-tor
     MyString(const char* string) {
         std::cout << "MyString c-tor" << std::endl;
+        //assert(_buffer != nullptr);
+
         auto len = strlen(string);
         _buffer = new char[len + 1];
         strncpy(_buffer, string, len);
         _buffer[len] = '\0';
     }
 
-    // Copy constructor
+    // Copy c-tor
     // Purpose:copied pointer members point not to the original but to copied content.
     MyString(const MyString& myString)
     {
@@ -72,6 +77,20 @@ private:
     char* _buffer;
 };
 
+class CWidget
+{
+public:
+	CWidget() {}
+
+	CWidget(const CWidget& rhs) {
+      std::cout << "CWidget Copy c-tor" << std::endl;
+    }
+    
+	CWidget(CWidget&& rhs) noexcept(true) {
+      std::cout << "CWidget Move c-tor" << std::endl;
+   }
+};
+
 struct ObjectsClassesDemo::S {
     // constructor
     S() {
@@ -89,7 +108,10 @@ void ObjectsClassesDemo::Demo() {
     MyStringDemo();
     MyStringMoveCtorDemo();
     MyStringMoveCtorDemo2();
+    MyStringMoveCtorDemo3();
+    LValueReferenceDemo();
     RValueReferenceDemo();
+    StdMoveDemo();
 }
 
 void ObjectsClassesDemo::CopyOnReturnDemo() {
@@ -103,6 +125,11 @@ ObjectsClassesDemo::S ObjectsClassesDemo::ReturnS() {
 MyString ObjectsClassesDemo::ReturnMyString() {
     std::cout << "ObjectsClassesDemo::ReturnMyString()" << std::endl;
     return MyString("String from ReturnMyString");
+}
+
+MyString ObjectsClassesDemo::CopyMyString(const MyString& str) {
+    std::cout << "ObjectsClassesDemo::CopyMyString()" << std::endl;
+    return MyString(str.GetString());
 }
 
 void ObjectsClassesDemo::MyStringDemo() {
@@ -143,15 +170,78 @@ void ObjectsClassesDemo::MyStringMoveCtorDemo2() {
     std::cout << "s1 string = " << s1.GetString() << std::endl;
 }
 
+void ObjectsClassesDemo::MyStringMoveCtorDemo3() {
+    std::cout << "ObjectsClassesDemo::MyStringMoveCtorDemo3()" << std::endl;
+    MyString s1("test1");
+    MyString s2(CopyMyString(s1));
+    std::cout << "s2 = " << s2.GetString() << std::endl;
+}
+
+void ObjectsClassesDemo::LValueReferenceDemo()
+{
+    std::cout << "ObjectsClassesDemo::LValueReferenceDemo()" << std::endl;
+
+    // direct initialization
+    MyString s1("test1");
+    std::cout << "s1 = " << s1.GetString() << std::endl;
+    
+    // non-const lvalue reference
+    MyString& s2 = s1;
+    std::cout << "s2 = " << s1.GetString() << std::endl;
+
+    const MyString s3("test3");
+
+    // error: binding ‘const MyString’ to reference of type ‘MyString&’ discards qualifiers
+    // MyString& s4 = s3;
+
+    // const lvalue reference
+    const MyString& s4 = s3;
+
+    // error: invalid initialization of non-const reference of type ‘int&’ from an rvalue of type ‘int’
+    // int& rInt = 5; 
+}
+
 void ObjectsClassesDemo::RValueReferenceDemo()
 {
     std::cout << "ObjectsClassesDemo::RValueReferenceDemo()" << std::endl;
-    MyString s1("test1");
-    std::cout << "s1 = " << s1.GetString() << std::endl;
-    MyString& s2 = s1;
-    std::cout << "s2 = " << s1.GetString() << std::endl;
-    MyString&& s3 = ReturnMyString();
-    std::cout << "s3 = " << s1.GetString() << std::endl;
 
-    // MyString&& s4 = s1; // error: cannot bind ‘MyString’ lvalue to ‘MyString&&’
+    // direct initialization
+    MyString s1("test1");
+
+    // error: cannot bind ‘MyString’ lvalue to ‘MyString&&’
+    // MyString&& s2 = s1; 
+
+    // non-const rvalue reference
+    MyString&& s3 = ReturnMyString();
+    std::cout << "s3 = " << s3.GetString() << std::endl;
+
+    // const rvalue reference
+    const int& n1 = 5;
+}
+
+// Try this with CWidget move c-tor throwing/ not throwing exception; 
+// If move c-tor can throw exception compiler choses copy c-tor.
+void ObjectsClassesDemo::StdMoveDemo()
+{
+    std::cout << "ObjectsClassesDemo::StdMoveDemo()" << std::endl;
+
+    std::cout << "push_back(widget): " << std::endl;
+
+	std::vector<CWidget> vec1;
+
+	for(int n = 0; n < 5; n++)
+	{
+		CWidget widget;
+		vec1.push_back(widget); // move so we can see copy's easier
+	}
+
+    std::cout << "push_back(std::move(widget)): " << std::endl;
+
+	std::vector<CWidget> vec2;
+
+	for(int n = 0; n < 5; n++)
+	{
+		CWidget widget;
+        vec2.push_back(std::move(widget));
+	}
 }
