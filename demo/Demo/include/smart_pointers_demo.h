@@ -6,8 +6,10 @@ class SmartPointersDemo
 public:
     void Demo();
 private:
-    void SharedPtrDemo();
+    void SharedPtrConstructionDemo();
     void SharedPtrSwapDemo();
+    void SharedPtrDestructionDemo();
+    void MethodReturnsSharedPtrDemo();
 };
 
 #endif //_SMART_POINTERS_DEMO_H_

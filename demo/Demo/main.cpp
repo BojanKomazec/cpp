@@ -3,9 +3,11 @@
 #include "include/objects_classes_demo.h"
 #include "include/stl/vector_demo.h"
 #include "include/stl/streams_demo.h"
+#include "include/stl/containers/set_demo.h"
 #include "include/polymorphism_demo.h"
 #include "include/smart_pointers_demo.h"
 #include "include/enum_demo.h"
+#include "include/exceptions_demo.h"
 
 int main()
 {
@@ -16,5 +18,7 @@ int main()
     //PolymorphismDemo().Demo();
     //SmartPointersDemo().Demo();
     //StreamsDemo().Demo();
-    EnumDemo().Demo();
+    //EnumDemo().Demo();
+    //SetDemo().Demo();
+    ExceptionsDemo().Demo();
 }

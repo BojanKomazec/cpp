@@ -36,6 +36,10 @@ void VariablesTypesDemo::AutoDemo()
 
     auto number3 = std::numeric_limits<unsigned long long>::max() - 1;
     std::cout << "number3 = " << number3 << std::endl;
+
+    const int& intRef = 123;
+    auto& autoRef = intRef;
+    std::cout << "autoRef = " << autoRef << std::endl;
 }
 
 // http://en.cppreference.com/w/cpp/language/constexpr
