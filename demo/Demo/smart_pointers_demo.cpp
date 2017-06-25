@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <iostream>
+#include <cassert>
 using std::cout;
 using std::endl;
 using std::shared_ptr;
@@ -27,8 +28,35 @@ class SharedPointerHolder
 public:
     std::shared_ptr<S> CreateS() {
         sp_ = std::shared_ptr<S>(new S());
-        cout << "sp_.use_count = " << sp_.use_count() << endl;
+        cout << "SharedPointerHolder::CreateS(): sp_.use_count = " << sp_.use_count() << endl;
         return sp_;
+    }
+
+        
+    // a copy of pS is made and ref count increments; method can change S but NOT original shared_ptr
+    void MethodWithSharedPtrPassedByValueAsArg(std::shared_ptr<S> pS, int newIntFieldValue, int newIntFieldValue2) {
+        cout << "SharedPointerHolder::MethodWithSharedPtrPassedByValueAsArg()" << endl;
+        cout << "pS.use_count = " << pS.use_count() << endl;
+
+        pS->IntField = newIntFieldValue;
+        assert(pS->IntField == newIntFieldValue);
+
+        cout << "SharedPointerHolder::MethodWithSharedPtrPassedByValueAsArg(): reassigning pS..." << endl;
+        pS = std::make_shared<S>(newIntFieldValue2, "");
+        assert(pS->IntField == newIntFieldValue2);
+    }
+
+    // ref count does NOT increment; method can change S AND shared_ptr 
+    void MethodWithSharedPtrPassedByRefAsArg(std::shared_ptr<S>& pS, int newIntFieldValue, int newIntFieldValue2) {
+        cout << "SharedPointerHolder::MethodWithSharedPtrPassedByRefAsArg()" << endl;
+        cout << "pS.use_count = " << pS.use_count() << endl;
+
+        pS->IntField = newIntFieldValue;
+        assert(pS->IntField == newIntFieldValue);
+
+        cout << "SharedPointerHolder::MethodWithSharedPtrPassedByRefAsArg(): reassigning pS..." << endl;
+        pS = std::make_shared<S>(newIntFieldValue2, "");
+        assert(pS->IntField == newIntFieldValue2);
     }
 
 private:
@@ -41,6 +69,7 @@ void SmartPointersDemo::Demo()
     SharedPtrSwapDemo();
     SharedPtrDestructionDemo();
     MethodReturnsSharedPtrDemo();
+    PassingSharedPtrByValueDemo();
 }
 
 void SmartPointersDemo::SharedPtrConstructionDemo()
@@ -144,4 +173,26 @@ void SmartPointersDemo::MethodReturnsSharedPtrDemo()
     SharedPointerHolder sph;
     std::shared_ptr<S> s = sph.CreateS();
     cout << "s.use_count = " << s.use_count() << endl;
+}
+
+void SmartPointersDemo::PassingSharedPtrByValueDemo()
+{
+    cout << "SmartPointersDemo::PassingSharedPtrByValueDemo()" << endl;
+
+    SharedPointerHolder sph;
+    shared_ptr<S> pS = std::make_shared<S>(1, "one");
+
+    sph.MethodWithSharedPtrPassedByValueAsArg(pS, 2, 3);
+    assert(pS->IntField == 2);
+}
+
+void SmartPointersDemo::PassingSharedPtrByRefDemo()
+{
+    cout << "SmartPointersDemo::PassingSharedPtrByRefDemo()" << endl;
+
+    SharedPointerHolder sph;
+    shared_ptr<S> pS = std::make_shared<S>(1, "one");
+
+    sph.MethodWithSharedPtrPassedByRefAsArg(pS, 2, 3);
+    assert(pS->IntField == 2);
 }

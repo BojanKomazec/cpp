@@ -10,6 +10,8 @@ private:
     void SharedPtrSwapDemo();
     void SharedPtrDestructionDemo();
     void MethodReturnsSharedPtrDemo();
+    void PassingSharedPtrByValueDemo();
+    void PassingSharedPtrByRefDemo();
 };
 
 #endif //_SMART_POINTERS_DEMO_H_

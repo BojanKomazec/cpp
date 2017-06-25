@@ -2,10 +2,48 @@
 #include <stdexcept>
 #include <iostream>
 
+
+class B
+{
+public: 
+    B() : pChar_(nullptr){
+        std::cout << "B::B()" << std::endl;
+        pChar_ = new char[100];
+    }
+
+    ~B() {
+        std::cout << "B::~B()" << std::endl;
+        if (pChar_) {
+            delete[] pChar_;
+            pChar_ = nullptr;
+        }
+    }
+
+private:
+    char* pChar_;
+};
+
+class A
+{
+public: 
+    A(){
+        std::cout << "A::A()" << std::endl;
+        std::cout << "A::A() is about to throw an exception..." << std::endl;
+        throw 1;
+    }
+
+    ~A() {
+        std::cout << "A::~A()" << std::endl;
+    }
+private:
+    B b_;
+};
+
 void ExceptionsDemo::Demo()
 {
     // Call_Noexcept_Function_Which_Throws_Exception();
-    Call_Noexcept_Function_Which_Calls_Function_Which_Throws_Exception();
+    // Call_Noexcept_Function_Which_Calls_Function_Which_Throws_Exception();
+    MemberObjectsAreDestroyedIfConstructorThrows();
 }
 
 // try-catch is put here only for testing purposes; in production code would respect function's "noexcept" declaration
@@ -60,4 +98,21 @@ void ExceptionsDemo::Noexcept_Function_Which_Calls_Function_Which_Throws_Excepti
 {
     std::cout << "ExceptionsDemo::NoexceptFunctionWhichCallsFunctionWhichThrowsException()" << std::endl;
     Function_Which_Throws_Exception();
+}
+
+// Just before body of A's c-tor is executed, B object is created.
+// If A throws an exception, B's destructor will be called (but not A's as A object was never created).
+// This is one of the RAII.
+// If A() has to allocate some memory, it is best to use some smart pointer as A's member as in this case if
+// A() throws, that smart pointer will be destroyed (just as B in the example above) and memory will be deallocated.
+// If A() itself allocates memory and then throws, there will be a memory leak as ~A() is never called.
+void ExceptionsDemo::MemberObjectsAreDestroyedIfConstructorThrows()
+{
+    try
+    {
+        A();
+    }
+    catch(...)
+    {
+    }
 }

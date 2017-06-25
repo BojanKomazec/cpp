@@ -8,6 +8,7 @@
 #include "include/smart_pointers_demo.h"
 #include "include/enum_demo.h"
 #include "include/exceptions_demo.h"
+#include "include/move_semantics_demo.h"
 
 int main()
 {
@@ -20,5 +21,6 @@ int main()
     //StreamsDemo().Demo();
     //EnumDemo().Demo();
     //SetDemo().Demo();
-    ExceptionsDemo().Demo();
+    //ExceptionsDemo().Demo();
+    MoveSemanticsDemo().Demo();
 }
