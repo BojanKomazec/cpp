@@ -8,6 +8,7 @@
         "main.cpp",
         "enum_demo.cpp",  
         "exceptions_demo.cpp",
+        "misc_demo.cpp",
         "move_semantics_demo.cpp",
         "objects_classes_demo.cpp",
         "polymorphism_demo.cpp", 

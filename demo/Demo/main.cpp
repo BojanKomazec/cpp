@@ -10,10 +10,10 @@
 #include "include/exceptions_demo.h"
 #include "include/move_semantics_demo.h"
 
-int main()
+int main(void)
 {
     //VariablesTypesDemo().Demo();
-    //VectorDemo().Demo();
+    VectorDemo().Demo();
     //StringsDemo().Demo();
     //ObjectsClassesDemo().Demo();
     //PolymorphismDemo().Demo();
@@ -22,5 +22,7 @@ int main()
     //EnumDemo().Demo();
     //SetDemo().Demo();
     //ExceptionsDemo().Demo();
-    MoveSemanticsDemo().Demo();
+    //MoveSemanticsDemo().Demo();
+    
+    return 0;
 }

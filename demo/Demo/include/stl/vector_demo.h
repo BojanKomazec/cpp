@@ -5,7 +5,11 @@ class VectorDemo
 {
 public:
     void Demo();
-    void PrintAllElementsDemo();
+    void PrintAllElementsTest();
+    
+    void ConstructorsDemo();
+    void PushBackDemo();
+    void InsertDemo();
 };
 
 #endif
