@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <typeinfo>
+#include <ctime>
 
 namespace {
     int ReturnInt() { return 2; }

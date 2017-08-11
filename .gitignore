@@ -27,3 +27,9 @@
 *.exe
 *.out
 *.app
+
+# Microsoft C++ compiler/linker Program Database (Debug Info) files
+*.pdb
+
+# Microsoft C++ linker Incremental Link files
+*.ilk

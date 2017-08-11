@@ -1,8 +1,10 @@
 #include "include/smart_pointers_demo.h"
 
 #include <memory>
-#include <iostream>
+#include <iostream> // g++ indirectly pulls in <string> but cl does not
+#include <string> // required by cl
 #include <cassert>
+
 using std::cout;
 using std::endl;
 using std::shared_ptr;

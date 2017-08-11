@@ -2,24 +2,31 @@
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "0.1.0",
-    "command": "g++",
-    "isShellCommand": true,
-    "args": ["-std=c++14", "-Wall", "-pedantic", "-g", "-Wno-unused-variable", "-Wno-unused-but-set-variable",
-        "main.cpp",
-        "enum_demo.cpp",  
-        "exceptions_demo.cpp",
-        "misc_demo.cpp",
-        "move_semantics_demo.cpp",
-        "objects_classes_demo.cpp",
-        "polymorphism_demo.cpp", 
-        "regex_demo.cpp", 
-        "smart_pointers_demo.cpp", 
-        "strings_demo.cpp", 
-        "variables_types_demo.cpp",
-        "stl/vector_demo.cpp", 
-        "stl/streams_demo.cpp", 
-        "stl/containers/set_demo.cpp",  
-        "-o", "demo.out"],
-    "showOutput": "always",
-    "echoCommand": true
+    "linux": {
+        "command": "g++",
+        "isShellCommand": true,
+        "args": ["-std=c++14", "-Wall", "-pedantic", "-g", "-Wno-unused-variable", "-Wno-unused-but-set-variable",
+            "main.cpp",
+            "enum_demo.cpp",
+            "exceptions_demo.cpp",
+            "misc_demo.cpp",
+            "move_semantics_demo.cpp",
+            "objects_classes_demo.cpp",
+            "polymorphism_demo.cpp",
+            "regex_demo.cpp",
+            "smart_pointers_demo.cpp",
+            "strings_demo.cpp",
+            "variables_types_demo.cpp",
+            "stl/vector_demo.cpp",
+            "stl/streams_demo.cpp",
+            "stl/containers/set_demo.cpp",
+            "-o", "demo.out"],
+        "showOutput": "always",
+        "echoCommand": true
+    },
+    "windows": {
+        "command": "build.bat",
+        "isShellCommand": true,
+        "showOutput": "always"
+    }
 }

@@ -6,7 +6,7 @@
 #include "include/polymorphism_demo.h"
 #include "include/smart_pointers_demo.h"
 #include "include/stl/containers/set_demo.h"
-#include "include/stl/vector_demo.h"
+#include "include/stl/containers/vector_demo.h"
 #include "include/stl/streams_demo.h"
 #include "include/strings_demo.h"
 #include "include/variables_types_demo.h"

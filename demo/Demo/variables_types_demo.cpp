@@ -28,7 +28,9 @@ void VariablesTypesDemo::AutoDemo()
 {
     std::cout << "VariablesTypesDemo::AutoDemo()" << std::endl;
 
-    auto number = 155597374375995873326345038373738494;
+    // cl: error C2177: constant too big
+    // auto number = 155597374375995873326345038373738494;
+    auto number = 1555973743759958;
     std::cout << "number = " << number << std::endl;
 
     auto number2 = std::numeric_limits<unsigned long long>::max();
