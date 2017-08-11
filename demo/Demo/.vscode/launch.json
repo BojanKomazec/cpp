@@ -1,8 +1,20 @@
 {
     "version": "0.2.0",
     "configurations": [
+
         {
-            "name": "C++ Launch",
+            "name": "(Windows) Launch",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/demo.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceRoot}",
+            "environment": [],
+            "externalConsole": true
+        },
+        {
+            "name": "(gdb) C++ Launch",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceRoot}/demo.out",

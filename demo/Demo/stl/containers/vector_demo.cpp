@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <cassert>
+#include <string>
 
 // http://en.cppreference.com/w/cpp/language/function_template
 template<class T> void PrintAllElements(const std::vector<T>& v)
