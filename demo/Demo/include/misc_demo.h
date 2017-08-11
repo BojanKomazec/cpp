@@ -6,7 +6,7 @@
 class MiscDemo
 {
 public:
-    std::vector<int*>::const_iterator FindNull(const std::vector<int*>& vec);    
+    void Demo();
 };
 
 #endif // _MISC_DEMO_H_
