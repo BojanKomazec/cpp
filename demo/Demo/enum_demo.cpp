@@ -4,6 +4,28 @@
 using std::cout;
 using std::endl;
 
+namespace 
+{
+
+class EnumClassTest
+{
+public:
+    // enum class can be forward-declared
+    enum class CarBrand;
+    
+    void Foo(CarBrand brand_arg) {
+        CarBrand brand = brand_arg;
+    }
+
+    enum class CarBrand {
+        Citroen, 
+        Hyundai,
+        Yugo
+    };
+};
+
+} // namespace
+
 // conventional (traditional, classic, unscoped) enum
 enum Colour
 {

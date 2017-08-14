@@ -5,6 +5,7 @@
 #include "include/objects_classes_demo.h"
 #include "include/polymorphism_demo.h"
 #include "include/smart_pointers_demo.h"
+#include "include/stl/containers/map_demo.h"
 #include "include/stl/containers/set_demo.h"
 #include "include/stl/containers/vector_demo.h"
 #include "include/stl/streams_demo.h"
@@ -15,7 +16,8 @@ int main(void)
 {
     //EnumDemo().Demo();
     //ExceptionsDemo().Demo();
-    MiscDemo().Demo();
+    MapDemo().Demo();
+    //MiscDemo().Demo();
     //MoveSemanticsDemo().Demo();
     //ObjectsClassesDemo().Demo();
     //PolymorphismDemo().Demo();

@@ -19,6 +19,7 @@
             "variables_types_demo.cpp",
             "stl/vector_demo.cpp",
             "stl/streams_demo.cpp",
+            "stl/containers/map_demo.cpp",
             "stl/containers/set_demo.cpp",
             "-o", "demo.out"],
         "showOutput": "always",
