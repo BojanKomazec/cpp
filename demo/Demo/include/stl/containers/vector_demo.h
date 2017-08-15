@@ -1,5 +1,5 @@
-#ifndef _VECTOR_DEMO_H_
-#define _VECTOR_DEMO_H_
+#ifndef VECTOR_DEMO_H_
+#define VECTOR_DEMO_H_
 
 class VectorDemo
 {
@@ -12,4 +12,4 @@ public:
     void InsertDemo();
 };
 
-#endif
+#endif // VECTOR_DEMO_H_
