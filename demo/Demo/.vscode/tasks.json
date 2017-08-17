@@ -17,10 +17,11 @@
             "smart_pointers_demo.cpp",
             "strings_demo.cpp",
             "variables_types_demo.cpp",
-            "stl/vector_demo.cpp",
             "stl/streams_demo.cpp",
+            "stl/containers/array_demo.cpp",
             "stl/containers/map_demo.cpp",
             "stl/containers/set_demo.cpp",
+            "stl/containers/vector_demo.cpp",
             "-o", "demo.out"],
         "showOutput": "always",
         "echoCommand": true
