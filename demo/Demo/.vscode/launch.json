@@ -3,7 +3,7 @@
     "configurations": [
 
         {
-            "name": "(Windows) Launch",
+            "name": "Visual Studio Debugger (Windows only)",
             "type": "cppvsdbg",
             "request": "launch",
             "program": "${workspaceRoot}/demo.exe",
@@ -14,7 +14,7 @@
             "externalConsole": true
         },
         {
-            "name": "(gdb) C++ Launch",
+            "name": "gdb Debugger",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceRoot}/demo.out",
