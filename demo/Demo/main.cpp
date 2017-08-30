@@ -15,20 +15,20 @@
 
 int main(void)
 {
-    ArrayDemo().Demo();
+    // ArrayDemo().Demo();
     // EnumDemo().Demo();
     // ExceptionsDemo().Demo();
     // MapDemo().Demo();
     // MiscDemo().Demo();
     // MoveSemanticsDemo().Demo();
-    // ObjectsClassesDemo().Demo();
+    ObjectsClassesDemo().Demo();
     // PolymorphismDemo().Demo();
     // SmartPointersDemo().Demo();
     // StreamsDemo().Demo();
     // SetDemo().Demo();
     // StringsDemo().Demo();
     // VariablesTypesDemo().Demo();
-    // VectorDemo().Demo();
+    VectorDemo().Demo();
     
     return 0;
 }
