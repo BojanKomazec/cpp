@@ -76,13 +76,14 @@ public:
         return *this;        
     }
 
+    // https://stackoverflow.com/questions/45959751/which-exception-to-throw-when-current-state-of-the-object-does-not-allow-attempt
     char operator[](size_t index)
     {
         if (size_ == 0)
-            throw std::exception(); // object in bad state exception ?
+            throw std::out_of_range("Collection is empty");
 
         if (index >= size_)
-            throw std::out_of_range("index is out of range");
+            throw std::out_of_range("Index is out of range");
 
         return buffer_[index];
     }
