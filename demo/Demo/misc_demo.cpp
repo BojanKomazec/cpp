@@ -50,11 +50,59 @@ namespace
         vector<int*> v = { &a, &b, &c, nullptr, &e };
         auto it = FindNull2<vector<int*>>(v);
         assert(*it == nullptr);
-    }  
+    }
+    
+    const char* FunctionWhichReturnsPointerToChar()
+    {
+        std::string s("test");
+        return s.c_str();
+    }
+
+    std::string FunctionWhichReturnsString()
+    {
+        return std::string("test");
+    }
+
+    void TestObjectScope()
+    {
+        std::string s1(FunctionWhichReturnsPointerToChar());
+        // This assertion fails:
+        // assert(s == "test");
+        std::string s2(FunctionWhichReturnsString());
+        assert(s2 == "test");
+
+        std::string& s3 = FunctionWhichReturnsString();
+        assert(s3 == "test");
+        s3[0] = 'b';
+        assert(s3 == "best");
+
+        std::string&& s4 = FunctionWhichReturnsString();
+        assert(s4 == "test");
+        s4[0] = 'b';
+        assert(s4 == "best");
+        
+        std::string&& s5 = std::move(FunctionWhichReturnsString());
+        // This assertion fails.
+        // assert(s5 == "test");
+
+        // error C2440: 'initializing': cannot convert from 'int' to 'int &'
+        // int& int_ref = 3 + 4;
+
+        const int& int_ref1 = 3 + 4;
+
+        int&& int_ref2 = 3 + 4;
+        int_ref2 = 8;
+
+        const int&& int_ref3 = 3 + 4;
+        // error C3892: 'int_ref3': you cannot assign to a variable that is const
+        // int_ref3 = 8;
+
+    }
 }
 
 void MiscDemo::Demo()
 {
     FindNull1_Test();
     FindNull2_Test();
+    TestObjectScope();
 }
