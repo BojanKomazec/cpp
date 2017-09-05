@@ -8,6 +8,7 @@
 #include "include/stl/containers/array_demo.h"
 #include "include/stl/containers/map_demo.h"
 #include "include/stl/containers/set_demo.h"
+#include "include/stl/containers/unordered_map_demo.h"
 #include "include/stl/containers/vector_demo.h"
 #include "include/stl/streams_demo.h"
 #include "include/strings_demo.h"
@@ -19,7 +20,7 @@ int main(void)
     // EnumDemo().Demo();
     // ExceptionsDemo().Demo();
     // MapDemo().Demo();
-     MiscDemo().Demo();
+    // MiscDemo().Demo();
     // MoveSemanticsDemo().Demo();
     // ObjectsClassesDemo().Demo();
     // PolymorphismDemo().Demo();
@@ -27,6 +28,7 @@ int main(void)
     // StreamsDemo().Demo();
     // SetDemo().Demo();
     // StringsDemo().Demo();
+    UnorderedMapDemo().Demo();
     // VariablesTypesDemo().Demo();
     // VectorDemo().Demo();
     
