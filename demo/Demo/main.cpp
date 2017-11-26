@@ -11,13 +11,15 @@
 #include "include/stl/containers/vector_demo.h"
 #include "include/stl/streams_demo.h"
 #include "include/strings_demo.h"
+#include "include/lambda_demo.h"
 #include "include/variables_types_demo.h"
 
 int main(void)
 {
-    ArrayDemo().Demo();
+    // ArrayDemo().Demo();
     // EnumDemo().Demo();
     // ExceptionsDemo().Demo();
+    LambdaDemo().Demo();
     // MapDemo().Demo();
     // MiscDemo().Demo();
     // MoveSemanticsDemo().Demo();
@@ -29,6 +31,6 @@ int main(void)
     // StringsDemo().Demo();
     // VariablesTypesDemo().Demo();
     // VectorDemo().Demo();
-    
+
     return 0;
 }

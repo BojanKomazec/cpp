@@ -16,6 +16,7 @@
             "regex_demo.cpp",
             "smart_pointers_demo.cpp",
             "strings_demo.cpp",
+            "lambda_demo.cpp",
             "variables_types_demo.cpp",
             "stl/streams_demo.cpp",
             "stl/containers/array_demo.cpp",

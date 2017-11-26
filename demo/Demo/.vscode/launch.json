@@ -1,7 +1,6 @@
 {
     "version": "0.2.0",
     "configurations": [
-
         {
             "name": "Visual Studio Debugger (Windows only)",
             "type": "cppvsdbg",
@@ -23,8 +22,18 @@
             "cwd": "${workspaceRoot}",
             "environment": [],
             "externalConsole": true,
+            //"launchCompleteCommand": "exec-run",
+            "setupCommands": 
+            [ 
+                { 
+                    "text": "target-run", 
+                    "description": "run target", 
+                    "ignoreFailures": false 
+                }
+            ],
             "linux": {
                 "MIMode": "gdb",
+                "miDebuggerPath": "/usr/bin/gdb",
                 "setupCommands": [
                     {
                         "description": "Enable pretty-printing for gdb",
