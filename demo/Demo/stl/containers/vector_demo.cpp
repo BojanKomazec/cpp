@@ -16,6 +16,8 @@ void VectorDemo::Demo()
     PrintAllElementsTest();
     ConstructorsDemo();
     InsertDemo();
+    IndexOperatorDemo();
+    AtDemo();
 }
 
 void VectorDemo::PrintAllElementsTest()
@@ -90,8 +92,15 @@ void VectorDemo::InsertDemo()
 
     // after inserting one element, size grows by 1
     assert(vector_strings.size() == kInitialCount + 1);
-    // if insertion requires resizing, vector usually doubles the capacity (before inserton)
+
+    // capacity growth is compiler-dependent
+#ifdef _MSC_VER
+    assert(vector_strings.capacity() == kInitialCount + 1);
+#else // GCC
+    // if insertion requires resizing, vector usually doubles the capacity
+    // (before inserton)
     assert(vector_strings.capacity() == kInitialCount * 2);
+#endif
 
     // insertion shifts all subsequent elements one place towards the end
     assert(vector_strings[0] == "inserted1");
@@ -105,15 +114,60 @@ void VectorDemo::InsertDemo()
     std::cout << "Elements after insertion: " << std::endl;
     PrintAllElements<std::string>(vector_strings);
 
-    // Now size iz 4 and capacity is 6. If we add 3 more items, capacity will double before 
-    // insertion and should be 12 and size 7 (after insertion).
+    // Now size iz 4 and capacity is 6. If we add 3 more items:
+    // capacity:
+    //    gcc: will double before insertion and should be 12
+    //   msvc: TODO: find out the rule how MSVC compiler increases capacity
+    // size:
+    //    7 (after insertion)
     vector_strings.insert(vector_strings.begin(), "inserted2");
     vector_strings.insert(vector_strings.begin(), "inserted3");
     vector_strings.insert(vector_strings.begin(), "inserted4");
 
     assert(vector_strings.size() == kInitialCount + 1 + 3);
-    assert(vector_strings.size() == kInitialCount * 2 * 2);
+
+#ifdef _MSC_VER
+    auto cap = vector_strings.capacity();
+    // assert(vector_strings.capacity() == ???);
+#else  // GCC
+    assert(vector_strings.capacity() == kInitialCount * 2 * 2);
+#endif
 
     std::cout << "Elements after insertion: " << std::endl;
     PrintAllElements<std::string>(vector_strings);
+}
+
+// http://www.cplusplus.com/reference/vector/vector/operator[]/
+void VectorDemo::IndexOperatorDemo()
+{
+    std::cout << "VectorDemo::IndexOperatorDemo()" << std::endl;
+
+    std::vector<int> v;
+
+    try
+    {
+        // MSVC: undefined behaviour; VSCode just reexecutes this line
+        // auto val_0 = v[0];
+    }
+    catch(const std::exception& exc)
+    {
+        std::cerr << "Excepton caught: " << exc.what() << std::endl;
+    }
+}
+
+void VectorDemo::AtDemo()
+{
+    std::cout << "VectorDemo::AtDemo()" << std::endl;
+
+    std::vector<int> v;
+
+    try
+    {
+        auto val_0 = v.at(0);
+    }
+    catch(const std::exception& exc)
+    {
+        // for MSVC the output is: "invalid vector<T> subscript"
+        std::cerr << "Excepton caught: " << exc.what() << std::endl;
+    }
 }

@@ -7,19 +7,20 @@
 class MyString {
 public:
     // Default c-tor
-    MyString(){
-        assert(_buffer != nullptr);
+    MyString() : size_(0){
+        assert(buffer_ != nullptr);
     }
 
     // Converting c-tor
     MyString(const char* string) {
         std::cout << "MyString c-tor" << std::endl;
-        //assert(_buffer != nullptr);
+        //assert(buffer_ != nullptr);
 
         auto len = strlen(string);
-        _buffer = new char[len + 1];
-        strncpy(_buffer, string, len);
-        _buffer[len] = '\0';
+        buffer_ = new char[len + 1];
+        strncpy(buffer_, string, len);
+        buffer_[len] = '\0';
+        size_ = len;
     }
 
     // Copy c-tor
@@ -27,10 +28,11 @@ public:
     MyString(const MyString& myString)
     {
         std::cout << "MyString COPY c-tor" << std::endl;
-        auto len = strlen(myString.GetString());
-        _buffer = new char[len + 1];
-        strncpy(_buffer, myString.GetString(), len);
-        _buffer[len] = '\0';
+        auto len = myString.Length();
+        buffer_ = new char[len + 1];
+        strncpy(buffer_, myString.GetString(), len);
+        buffer_[len] = '\0';
+        size_ = len;
     }
 
     // Move c-tor
@@ -41,15 +43,19 @@ public:
     MyString(MyString&& myString)
     {
         std::cout << "MyString MOVE c-tor" << std::endl;
-        _buffer = myString._buffer;
-        myString._buffer = nullptr;
+        buffer_ = myString.buffer_;
+        size_ = myString.Length();
+
+        myString.buffer_ = nullptr;
+        myString.size_ = 0;
     }
 
     // http://stackoverflow.com/questions/11279715/nullptr-and-checking-if-a-pointer-points-to-a-valid-object
-    // 1. checking whether _buffer is nullptr is not necessary as it is safe to delete nullptr
+    // 1. checking whether buffer_ is nullptr is not necessary as it is safe to delete nullptr
     // 2. setting deleted pointer to nullptr is an anti-pattern
     ~MyString() {
-        delete _buffer;
+        delete[] buffer_;
+        size_ = 0;
     }
 
     // assignment operator can have argument of any type (not just const MyString&):
@@ -58,23 +64,39 @@ public:
         if (s == nullptr)
             throw std::invalid_argument("nullptr argument");
 
-        if (_buffer != nullptr)
-            delete[] _buffer;
+        if (buffer_ != nullptr)
+            delete[] buffer_;
 
         auto len = strlen(s);
-        _buffer = new char[len + 1];
-        strncpy(_buffer, s, len);
-        _buffer[len] = '\0';
+        buffer_ = new char[len + 1];
+        strncpy(buffer_, s, len);
+        buffer_[len] = '\0';
+        size_ = len;
 
         return *this;        
     }
 
-    const char* GetString() const {
-        return _buffer;
+    // https://stackoverflow.com/questions/45959751/which-exception-to-throw-when-current-state-of-the-object-does-not-allow-attempt
+    char operator[](size_t index)
+    {
+        if (size_ == 0)
+            throw std::out_of_range("Collection is empty");
+
+        if (index >= size_)
+            throw std::out_of_range("Index is out of range");
+
+        return buffer_[index];
     }
 
+    const char* GetString() const {
+        return buffer_;
+    }
+
+    size_t Length() const { return size_; }
+
 private:
-    char* _buffer;
+    char* buffer_;
+    size_t size_; // number of characters in the buffer
 };
 
 class CWidget
@@ -144,7 +166,7 @@ void ObjectsClassesDemo::MyStringDemo() {
     }
 
     // If there is only implicitly generated copy-ctor
-    // s2 d-tor deletes _buffer so s1 can't dereference it anymore =>
+    // s2 d-tor deletes buffer_ so s1 can't dereference it anymore =>
     // Error in `./demo.out': double free or corruption (fasttop)
     // This can be solved by introducing custom copy c-tor.
 
@@ -209,10 +231,18 @@ void ObjectsClassesDemo::RValueReferenceDemo()
     MyString s1("test1");
 
     // error: cannot bind ‘MyString’ lvalue to ‘MyString&&’
+    // This is because s1 is a variable so it is lvalue.
     // MyString&& s2 = s1; 
 
     // non-const rvalue reference
     MyString&& s3 = ReturnMyString();
+    std::cout << "s3 = " << s3.GetString() << std::endl;
+
+    // change temporary object via rvalue reference
+    // error C2106: '=': left operand must be l-value
+    // s3[0] = 'b';
+    // It is possible to change temp object via rvalue reference!
+    s3 = "best1";
     std::cout << "s3 = " << s3.GetString() << std::endl;
 
     // const rvalue reference

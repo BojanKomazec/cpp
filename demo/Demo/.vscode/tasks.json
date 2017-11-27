@@ -21,6 +21,7 @@
             "stl/streams_demo.cpp",
             "stl/containers/array_demo.cpp",
             "stl/containers/map_demo.cpp",
+            "stl/containers/unordered_map_demo.cpp",
             "stl/containers/set_demo.cpp",
             "stl/containers/vector_demo.cpp",
             "-o", "demo.out"],

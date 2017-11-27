@@ -10,6 +10,8 @@ public:
     void ConstructorsDemo();
     void PushBackDemo();
     void InsertDemo();
+    void IndexOperatorDemo();
+    void AtDemo();
 };
 
 #endif // VECTOR_DEMO_H_
