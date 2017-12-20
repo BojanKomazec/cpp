@@ -53,12 +53,17 @@ public:
         cout << "SharedPointerHolder::MethodWithSharedPtrPassedByRefAsArg()" << endl;
         cout << "pS.use_count = " << pS.use_count() << endl;
 
-        pS->IntField = newIntFieldValue;
-        assert(pS->IntField == newIntFieldValue);
+        if (pS == nullptr) {
+            cout << "WARNING: pS is nullptr." << endl;
+        }
+        else {
+            pS->IntField = newIntFieldValue;
+            assert(pS->IntField == newIntFieldValue);
 
-        cout << "SharedPointerHolder::MethodWithSharedPtrPassedByRefAsArg(): reassigning pS..." << endl;
-        pS = std::make_shared<S>(newIntFieldValue2, "");
-        assert(pS->IntField == newIntFieldValue2);
+            cout << "SharedPointerHolder::MethodWithSharedPtrPassedByRefAsArg(): reassigning pS..." << endl;
+            pS = std::make_shared<S>(newIntFieldValue2, "");
+            assert(pS->IntField == newIntFieldValue2);
+        }
     }
 
 private:
@@ -72,6 +77,7 @@ void SmartPointersDemo::Demo()
     SharedPtrDestructionDemo();
     MethodReturnsSharedPtrDemo();
     PassingSharedPtrByValueDemo();
+    PassingSharedPtrByRefDemo();
 }
 
 void SmartPointersDemo::SharedPtrConstructionDemo()
@@ -195,6 +201,11 @@ void SmartPointersDemo::PassingSharedPtrByRefDemo()
     SharedPointerHolder sph;
     shared_ptr<S> pS = std::make_shared<S>(1, "one");
 
-    sph.MethodWithSharedPtrPassedByRefAsArg(pS, 2, 3);
-    assert(pS->IntField == 2);
+    const int old_int_value = 2;
+    const int new_int_value = 3;
+    sph.MethodWithSharedPtrPassedByRefAsArg(pS, old_int_value, new_int_value);
+    assert(pS->IntField == new_int_value);
+
+    shared_ptr<S> pS2 = nullptr;
+    sph.MethodWithSharedPtrPassedByRefAsArg(pS2, 0, 0);
 }
