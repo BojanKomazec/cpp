@@ -1,3 +1,4 @@
+#include "include/const_correctness_demo.h"
 #include "include/enum_demo.h"
 #include "include/exceptions_demo.h"
 #include "include/functional_demo.h"
@@ -19,6 +20,7 @@
 int main(void)
 {
     // ArrayDemo().Demo();
+       ConstCorrectnessDemo().Demo();
     // EnumDemo().Demo();
     // ExceptionsDemo().Demo();
     // FunctionalDemo().Demo();
@@ -28,7 +30,7 @@ int main(void)
     // MoveSemanticsDemo().Demo();
     // ObjectsClassesDemo().Demo();
     // PolymorphismDemo().Demo();
-       SmartPointersDemo().Demo();
+    // SmartPointersDemo().Demo();
     // StreamsDemo().Demo();
     // SetDemo().Demo();
     // StringsDemo().Demo();

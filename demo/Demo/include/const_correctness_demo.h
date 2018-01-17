@@ -3,6 +3,8 @@
 
 class ConstCorrectnessDemo
 {
+    void ConstructorsDemo();
+    void StaticClassMemberDemo();
 public:
     void Demo();
 };
