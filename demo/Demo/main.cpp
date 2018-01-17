@@ -12,6 +12,7 @@
 #include "include/stl/containers/set_demo.h"
 #include "include/stl/containers/unordered_map_demo.h"
 #include "include/stl/containers/vector_demo.h"
+#include "include/stl/iterator_demo.h"
 #include "include/stl/streams_demo.h"
 #include "include/strings_demo.h"
 #include "include/lambda_demo.h"
@@ -20,10 +21,11 @@
 int main(void)
 {
     // ArrayDemo().Demo();
-       ConstCorrectnessDemo().Demo();
+    // ConstCorrectnessDemo().Demo();
     // EnumDemo().Demo();
     // ExceptionsDemo().Demo();
     // FunctionalDemo().Demo();
+    IteratorDemo().Demo();
     // LambdaDemo().Demo();
     // MapDemo().Demo();
     // MiscDemo().Demo();
