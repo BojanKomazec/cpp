@@ -4,6 +4,39 @@
 #include <cassert>
 #include <string>
 
+namespace {
+class MyStringWithCopyCtor : public std::string {
+public:
+    // c-tor with args
+    MyStringWithCopyCtor(const char* s) : std::string(s) {
+        std::cout << "MyStringWithCopyCtor::MyStringWithCopyCtor(const char* s): " << s << std::endl;
+    }
+
+    // copy c-tor
+    MyStringWithCopyCtor(const MyStringWithCopyCtor& other) : std::string(other) {
+        std::cout << "MyStringWithCopyCtor::MyStringWithCopyCtor(const MyStringWithCopyCtor& other): " << other.c_str() << std::endl;
+    }
+};
+
+class MyStringWithCopyAndMoveCtor : public std::string {
+public:
+    // c-tor with args
+    MyStringWithCopyAndMoveCtor(const char* s) : std::string(s) {
+        std::cout << "MyStringWithCopyAndMoveCtor::MyStringWithCopyAndMoveCtor(const char* s): " << s << std::endl;
+    }
+
+    // copy c-tor
+    MyStringWithCopyAndMoveCtor(const MyStringWithCopyAndMoveCtor& other) : std::string(other) {
+        std::cout << "MyStringWithCopyAndMoveCtor::MyStringWithCopyAndMoveCtor(const MyStringWithCopyAndMoveCtor& other): " << other.c_str() << std::endl;
+    }
+
+    // move c-tor
+    MyStringWithCopyAndMoveCtor(MyStringWithCopyAndMoveCtor&& other) : std::string(other) {
+        std::cout << "MyStringWithCopyAndMoveCtor::MyStringWithCopyAndMoveCtor(MyStringWithCopyAndMoveCtor&& other): " << other.c_str() << std::endl;
+    }
+};
+}
+
 // http://en.cppreference.com/w/cpp/language/function_template
 template<class T> void PrintAllElements(const std::vector<T>& v)
 {
@@ -13,11 +46,13 @@ template<class T> void PrintAllElements(const std::vector<T>& v)
 
 void VectorDemo::Demo()
 {
-    PrintAllElementsTest();
-    ConstructorsDemo();
-    InsertDemo();
-    IndexOperatorDemo();
-    AtDemo();
+    //PrintAllElementsTest();
+    //ConstructorsDemo();
+    //InsertDemo();
+    //IndexOperatorDemo();
+    //AtDemo();
+    PushBackDemo();
+    EmplaceBackDemo();
 }
 
 void VectorDemo::PrintAllElementsTest()
@@ -51,10 +86,31 @@ void VectorDemo::ConstructorsDemo()
     PrintAllElements<std::string>(vector_strings);
 }
 
-
 void VectorDemo::PushBackDemo()
 {
     std::cout << "VectorDemo::PushBackDemo()" << std::endl;
+
+    std::vector<MyStringWithCopyCtor> v1;
+    assert(v1.capacity() == 0);
+    assert(v1.size() == 0);
+
+    v1.push_back("string0");
+    assert(v1.capacity() == 1);
+    assert(v1.size() == 1);
+
+    std::vector<MyStringWithCopyAndMoveCtor> v2;
+    v2.push_back("string0"); // arg c-tor and then move c-tor is called
+
+    MyStringWithCopyAndMoveCtor s1("string1");
+    v2.push_back(s1);
+
+    MyStringWithCopyAndMoveCtor s2("string2");
+    v2.push_back(s2);
+
+    MyStringWithCopyAndMoveCtor s3("string3");
+    v2.push_back(std::move(s3));
+
+    // assert(v[0] == "test");
 
     // construct vector with 3 empty strings
     // const int kInitialCount = 3;
@@ -74,6 +130,23 @@ void VectorDemo::PushBackDemo()
     // PrintAllElements<std::string>(vector_strings);
 }
 
+void VectorDemo::EmplaceBackDemo() {
+    std::cout << "VectorDemo::EmplaceBackDemo()" << std::endl;
+
+    std::vector<MyStringWithCopyCtor> v1;
+    v1.emplace_back("test0");
+
+    MyStringWithCopyCtor s1("string1");
+    v1.emplace_back(s1);
+
+    std::vector<MyStringWithCopyAndMoveCtor> v2;
+    v2.emplace_back("test0");
+
+    MyStringWithCopyAndMoveCtor s2("string2");
+    v2.emplace_back(std::move(s2));
+
+    // assert(v[0] == "test");
+}
 
 void VectorDemo::InsertDemo()
 {

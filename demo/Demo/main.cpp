@@ -7,6 +7,7 @@
 #include "include/objects_classes_demo.h"
 #include "include/polymorphism_demo.h"
 #include "include/smart_pointers_demo.h"
+#include "include/stl/algorithm_demo.h"
 #include "include/stl/containers/array_demo.h"
 #include "include/stl/containers/map_demo.h"
 #include "include/stl/containers/set_demo.h"
@@ -14,18 +15,20 @@
 #include "include/stl/containers/vector_demo.h"
 #include "include/stl/iterator_demo.h"
 #include "include/stl/streams_demo.h"
+#include "include/stl/string_demo.h"
 #include "include/strings_demo.h"
 #include "include/lambda_demo.h"
 #include "include/variables_types_demo.h"
 
 int main(void)
 {
+    //AlgorithmDemo().Demo();
     // ArrayDemo().Demo();
     // ConstCorrectnessDemo().Demo();
     // EnumDemo().Demo();
     // ExceptionsDemo().Demo();
     // FunctionalDemo().Demo();
-    IteratorDemo().Demo();
+    // IteratorDemo().Demo();
     // LambdaDemo().Demo();
     // MapDemo().Demo();
     // MiscDemo().Demo();
@@ -35,10 +38,11 @@ int main(void)
     // SmartPointersDemo().Demo();
     // StreamsDemo().Demo();
     // SetDemo().Demo();
+    // StringDemo().Demo();
     // StringsDemo().Demo();
     // UnorderedMapDemo().Demo();
     // VariablesTypesDemo().Demo();
-    // VectorDemo().Demo();
+    VectorDemo().Demo();
 
     return 0;
 }

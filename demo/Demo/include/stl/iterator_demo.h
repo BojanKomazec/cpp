@@ -7,6 +7,7 @@ public:
     void Demo();
 private:
     void BeginEndDemo();
+    void ConstBeginEndDemo();
 };
 
 #endif

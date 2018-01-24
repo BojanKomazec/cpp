@@ -102,7 +102,7 @@ namespace
 
 void MiscDemo::Demo()
 {
-    FindNull1_Test();
-    FindNull2_Test();
-    TestObjectScope();
+    //FindNull1_Test();
+    //FindNull2_Test();
+    //TestObjectScope();
 }

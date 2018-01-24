@@ -7,6 +7,7 @@ public:
     void Demo();
 private:
     void AssignAppendDemo();
+    void SubStringDemo();
 };
 
 #endif
