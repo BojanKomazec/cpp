@@ -12,6 +12,8 @@ private:
     void MethodReturnsSharedPtrDemo();
     void PassingSharedPtrByValueDemo();
     void PassingSharedPtrByRefDemo();
+
+    void UniquePtrDemo();
 };
 
 #endif //_SMART_POINTERS_DEMO_H_

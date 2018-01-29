@@ -9,6 +9,8 @@ using std::cout;
 using std::endl;
 using std::shared_ptr;
 
+namespace {
+
 struct S
 {
     S() { std::cout << "S c-tor" << std::endl; }
@@ -70,14 +72,56 @@ private:
     std::shared_ptr<S> sp_;
 };
 
+struct IMovable {
+    virtual ~IMovable() = default;
+    virtual void move() = 0;
+};
+
+class Movable : public IMovable {
+public:
+    Movable() {
+        std::cout << "Movable::Movable()" << std::endl;
+    }
+
+    ~Movable() {
+        std::cout << "Movable::~Movable()" << std::endl;
+    }
+
+    virtual void move() override {
+        std::cout << "Movable::move()" << std::endl;
+    }
+};
+
+class UniquePtrHolder {
+    std::unique_ptr<IMovable> movable_;
+public:
+    // Dependency Injection
+    UniquePtrHolder(std::unique_ptr<IMovable>&& movable) : 
+        movable_(std::move(movable)) {
+        std::cout << "UniquePtrHolder::UniquePtrHolder()" << std::endl;
+    }
+
+    ~UniquePtrHolder() {
+        std::cout << "UniquePtrHolder::~UniquePtrHolder()" << std::endl;
+    }
+
+    const std::unique_ptr<IMovable>& GetMovable() const {
+        return movable_;
+    }
+};
+
+}
+
 void SmartPointersDemo::Demo()
 {
-    SharedPtrConstructionDemo();
-    SharedPtrSwapDemo();
-    SharedPtrDestructionDemo();
-    MethodReturnsSharedPtrDemo();
-    PassingSharedPtrByValueDemo();
-    PassingSharedPtrByRefDemo();
+    // SharedPtrConstructionDemo();
+    // SharedPtrSwapDemo();
+    // SharedPtrDestructionDemo();
+    // MethodReturnsSharedPtrDemo();
+    // PassingSharedPtrByValueDemo();
+    // PassingSharedPtrByRefDemo();
+
+    UniquePtrDemo();
 }
 
 void SmartPointersDemo::SharedPtrConstructionDemo()
@@ -208,4 +252,11 @@ void SmartPointersDemo::PassingSharedPtrByRefDemo()
 
     shared_ptr<S> pS2 = nullptr;
     sph.MethodWithSharedPtrPassedByRefAsArg(pS2, 0, 0);
+}
+
+void SmartPointersDemo::UniquePtrDemo() {
+    //std::unique_ptr<IMovable> movable = std::make_unique<IMovable>(Movable());
+    std::unique_ptr<IMovable> movable = std::make_unique<Movable>();
+    UniquePtrHolder uniquePtrHolder(std::move(movable));
+    uniquePtrHolder.GetMovable()->move();
 }

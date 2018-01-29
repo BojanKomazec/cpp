@@ -13,6 +13,8 @@ private:
     void IndexOperatorDemo();
     void AtDemo();
     void EmplaceBackDemo();
+    void OmitFirstElementDemo();
+    void FindFirstSpecificElementDemo();
 };
 
 #endif // VECTOR_DEMO_H_

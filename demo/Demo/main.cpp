@@ -35,7 +35,7 @@ int main(void)
     // MoveSemanticsDemo().Demo();
     // ObjectsClassesDemo().Demo();
     // PolymorphismDemo().Demo();
-    // SmartPointersDemo().Demo();
+    //SmartPointersDemo().Demo();
     // StreamsDemo().Demo();
     // SetDemo().Demo();
     // StringDemo().Demo();

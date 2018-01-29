@@ -3,6 +3,7 @@
 #include <vector>
 #include <cassert>
 #include <string>
+#include <algorithm>
 
 namespace {
 class MyStringWithCopyCtor : public std::string {
@@ -35,6 +36,15 @@ public:
         std::cout << "MyStringWithCopyAndMoveCtor::MyStringWithCopyAndMoveCtor(MyStringWithCopyAndMoveCtor&& other): " << other.c_str() << std::endl;
     }
 };
+
+struct Server {
+    std::string Name;
+    int Id;
+
+    Server(const std::string& name, int id) : 
+        Name(name), Id(id) {}
+};
+
 }
 
 // http://en.cppreference.com/w/cpp/language/function_template
@@ -51,8 +61,10 @@ void VectorDemo::Demo()
     //InsertDemo();
     //IndexOperatorDemo();
     //AtDemo();
-    PushBackDemo();
-    EmplaceBackDemo();
+    //PushBackDemo();
+    //EmplaceBackDemo();
+    OmitFirstElementDemo();
+    FindFirstSpecificElementDemo();
 }
 
 void VectorDemo::PrintAllElementsTest()
@@ -243,4 +255,19 @@ void VectorDemo::AtDemo()
         // for MSVC the output is: "invalid vector<T> subscript"
         std::cerr << "Excepton caught: " << exc.what() << std::endl;
     }
+}
+
+void VectorDemo::OmitFirstElementDemo() {
+    std::vector<Server> v { Server("Server1", 1), Server("Server2", 2), Server("Server3", 3) };
+    auto it = (v.size() > 1) ? ++std::cbegin(v) : std::cbegin(v);
+    while (it != std::cend(v)) {
+        std::cout << it->Name << std::endl;
+        ++it;
+    }
+}
+
+void VectorDemo::FindFirstSpecificElementDemo() {
+    std::vector<Server> v { Server("Server1", 1), Server("Server2", 2), Server("Server3", 3) };
+    auto it = std::find_if(std::cbegin(v), std::cend(v), [](const Server& server) { return server.Id == 2; } );
+    assert(it->Name == "Server2");
 }
