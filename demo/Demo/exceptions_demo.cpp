@@ -3,6 +3,8 @@
 #include <iostream>
 
 
+namespace {
+
 class B
 {
 public: 
@@ -26,7 +28,7 @@ private:
 class A
 {
 public: 
-    A(){
+    A() {
         std::cout << "A::A()" << std::endl;
         std::cout << "A::A() is about to throw an exception..." << std::endl;
         throw 1;
@@ -39,11 +41,27 @@ private:
     B b_;
 };
 
+void FunctionThatThrowsException() {
+    throw std::exception("Exception from FunctionThatThrowsException.");
+}
+
+void ExceptionHandler(std::string& log) {
+    try {
+        throw;
+    }catch(const std::exception& ex) {
+        log = log + ex.what();
+        std::cout << "Exception caught: " <<  ex.what() << std::endl;
+    }
+}
+
+}
+
 void ExceptionsDemo::Demo()
 {
     // Call_Noexcept_Function_Which_Throws_Exception();
     // Call_Noexcept_Function_Which_Calls_Function_Which_Throws_Exception();
-    MemberObjectsAreDestroyedIfConstructorThrows();
+    // MemberObjectsAreDestroyedIfConstructorThrows();
+    ExceptionHandlerFunctionDemo();
 }
 
 // try-catch is put here only for testing purposes; in production code would respect function's "noexcept" declaration
@@ -115,4 +133,15 @@ void ExceptionsDemo::MemberObjectsAreDestroyedIfConstructorThrows()
     catch(...)
     {
     }
+}
+
+void ExceptionsDemo::ExceptionHandlerFunctionDemo() {
+    std::string log;
+    try {
+        FunctionThatThrowsException();
+    }catch(...) {
+        ExceptionHandler(log);
+    }
+
+    std::cout << "Log: " << log.c_str() << std::endl;
 }

@@ -1,4 +1,4 @@
-#ifndef _SET_DEMO_H_
+#ifndef MAP_DEMO_H_
 #define MAP_DEMO_H_
 
 class MapDemo

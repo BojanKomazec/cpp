@@ -5,7 +5,7 @@
             "name": "Visual Studio Debugger (Windows only)",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/demo.exe",
+            "program": "${workspaceRoot}/build-ninja/demo.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceRoot}",

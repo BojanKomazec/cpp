@@ -22,11 +22,11 @@
 
 int main(void)
 {
-    //AlgorithmDemo().Demo();
+    // AlgorithmDemo().Demo();
     // ArrayDemo().Demo();
     // ConstCorrectnessDemo().Demo();
     // EnumDemo().Demo();
-    // ExceptionsDemo().Demo();
+    ExceptionsDemo().Demo();
     // FunctionalDemo().Demo();
     // IteratorDemo().Demo();
     // LambdaDemo().Demo();
@@ -35,14 +35,14 @@ int main(void)
     // MoveSemanticsDemo().Demo();
     // ObjectsClassesDemo().Demo();
     // PolymorphismDemo().Demo();
-    //SmartPointersDemo().Demo();
+    // SmartPointersDemo().Demo();
     // StreamsDemo().Demo();
     // SetDemo().Demo();
     // StringDemo().Demo();
     // StringsDemo().Demo();
     // UnorderedMapDemo().Demo();
     // VariablesTypesDemo().Demo();
-    VectorDemo().Demo();
+    // VectorDemo().Demo();
 
     return 0;
 }

@@ -30,6 +30,8 @@ struct S2
 class SharedPointerHolder
 {
 public:
+    SharedPointerHolder() : sp_(std::make_shared<S>(123, "test")) {}
+
     std::shared_ptr<S> CreateS() {
         sp_ = std::shared_ptr<S>(new S());
         cout << "SharedPointerHolder::CreateS(): sp_.use_count = " << sp_.use_count() << endl;

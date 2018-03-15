@@ -1,0 +1,112 @@
+{
+  "variant": {
+    "label": "Debug",
+    "keywordSettings": {
+      "buildType": "debug"
+    },
+    "description": "Emit debug information without performing optimizations"
+  },
+  "activeEnvironments": [
+    "Visual Studio Professional 2017 - amd64"
+  ],
+  "codeModel": {
+    "configurations": [
+      {
+        "name": "Debug",
+        "projects": [
+          {
+            "buildDirectory": "C:/dev/github/cpp/demo/Demo/build",
+            "name": "Demo",
+            "sourceDirectory": "C:/dev/github/cpp/demo/Demo",
+            "targets": [
+              {
+                "artifacts": [
+                  "C:/dev/github/cpp/demo/Demo/build/demo.exe",
+                  "C:/dev/github/cpp/demo/Demo/build/demo.lib",
+                  "C:/dev/github/cpp/demo/Demo/build/demo.pdb"
+                ],
+                "buildDirectory": "C:/dev/github/cpp/demo/Demo/build",
+                "fileGroups": [
+                  {
+                    "isGenerated": false,
+                    "sources": [
+                      "include/class_with_no_default_ctor.h",
+                      "include/class_with_no_public_ctor.h",
+                      "include/const_correctness_demo.h",
+                      "include/enum_demo.h",
+                      "include/exceptions_demo.h",
+                      "include/file_demo.h",
+                      "include/functional_demo.h",
+                      "include/future_demo.h",
+                      "include/lambda_demo.h",
+                      "include/misc_demo.h",
+                      "include/move_semantics_demo.h",
+                      "include/objects_classes_demo.h",
+                      "include/polymorphism_demo.h",
+                      "include/regex_demo.h",
+                      "include/smart_pointers_demo.h",
+                      "include/strings_demo.h",
+                      "include/variables_types_demo.h",
+                      "include/stl/algorithm_demo.h",
+                      "include/stl/class_with_no_default_ctor.h",
+                      "include/stl/iterator_demo.h",
+                      "include/stl/streams_demo.h",
+                      "include/stl/string_demo.h",
+                      "include/stl/containers/array_demo.h",
+                      "include/stl/containers/map_demo.h",
+                      "include/stl/containers/set_demo.h",
+                      "include/stl/containers/unordered_map_demo.h",
+                      "include/stl/containers/vector_demo.h"
+                    ]
+                  },
+                  {
+                    "compileFlags": "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   -std:c++14",
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "const_correctness_demo.cpp",
+                      "enum_demo.cpp",
+                      "exceptions_demo.cpp",
+                      "file_demo.cpp",
+                      "functional_demo.cpp",
+                      "lambda_demo.cpp",
+                      "main.cpp",
+                      "misc_demo.cpp",
+                      "move_semantics_demo.cpp",
+                      "objects_classes_demo.cpp",
+                      "polymorphism_demo.cpp",
+                      "regex_demo.cpp",
+                      "smart_pointers_demo.cpp",
+                      "strings_demo.cpp",
+                      "variables_types_demo.cpp",
+                      "stl/algorithm_demo.cpp",
+                      "stl/iterator_demo.cpp",
+                      "stl/streams_demo.cpp",
+                      "stl/string_demo.cpp",
+                      "stl/containers/array_demo.cpp",
+                      "stl/containers/map_demo.cpp",
+                      "stl/containers/set_demo.cpp",
+                      "stl/containers/unordered_map_demo.cpp",
+                      "stl/containers/vector_demo.cpp"
+                    ]
+                  }
+                ],
+                "fullName": "demo.exe",
+                "linkFlags": "/machine:x64 /debug /INCREMENTAL /subsystem:console",
+                "linkLanguageFlags": "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1",
+                "linkLibraries": "kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
+                "linkerLanguage": "CXX",
+                "name": "demo",
+                "sourceDirectory": "C:/dev/github/cpp/demo/Demo",
+                "type": "EXECUTABLE"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "cookie": "0.823691985458856",
+    "inReplyTo": "codemodel",
+    "type": "reply"
+  }
+}
